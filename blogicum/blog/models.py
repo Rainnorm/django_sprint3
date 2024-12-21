@@ -6,11 +6,12 @@ class Category(models.Model):
     title = models.CharField('Заголовок', max_length=256)
     description = models.TextField('Описание')
     slug = models.SlugField('Идентификатор', unique=True,
-                            help_text='Идентификатор страницы для URL; '\
-                                  'разрешены символы латиницы, цифры, дефис и подчёркивание.')
+                            help_text=('Идентификатор страницы для URL; '
+                                       'разрешены символы латиницы, цифры, '
+                                       'дефис и подчёркивание.'))
     is_published = models.BooleanField(
-        'Опубликовано', default=True, help_text='Снимите галочку,' \
-            'чтобы скрыть публикацию.')
+        'Опубликовано', default=True, help_text=('Снимите галочку, '
+                                                 'чтобы скрыть публикацию.'))
     created_at = models.DateTimeField('Добавлено', auto_now_add=True)
 
     class Meta:
@@ -21,8 +22,8 @@ class Category(models.Model):
 class Location(models.Model):
     name = models.CharField('Название места', max_length=256)
     is_published = models.BooleanField(
-        'Опубликовано', default=True, help_text='Снимите' \
-            'галочку, чтобы скрыть публикацию.')
+        'Опубликовано', default=True, help_text=('Снимите '
+                                                 'галочку, чтобы скрыть публикацию.'))
     created_at = models.DateTimeField('Добавлено', auto_now_add=True)
 
     class Meta:
@@ -37,8 +38,8 @@ class Post(models.Model):
     title = models.CharField('Заголовок', max_length=256)
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
-        'Дата и время публикации', help_text='Если установить дату и время в ' \
-            'будущем — можно делать отложенные публикации.')
+        'Дата и время публикации', help_text=('Если установить дату и время в '
+                                              'будущем — можно делать отложенные публикации.'))
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name='Автор публикации')
     location = models.ForeignKey(
@@ -46,7 +47,8 @@ class Post(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     is_published = models.BooleanField(
-        'Опубликовано', default=True, help_text='Снимите галочку, чтобы скрыть публикацию.')
+        'Опубликовано', default=True, help_text=('Снимите'
+                                                 ' галочку, чтобы скрыть публикацию.'))
     created_at = models.DateTimeField('Добавлено', auto_now_add=True)
 
     class Meta:
